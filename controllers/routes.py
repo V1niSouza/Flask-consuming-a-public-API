@@ -5,6 +5,9 @@ import urllib
 import json
 
 gatos = []
+gatolist = [{'nome': 'Farofa',
+             'raca': 'Vira lata',
+             'idade': 10}]
 
 
 def init_app(app):
@@ -22,3 +25,11 @@ def init_app(app):
 
         return render_template('catlist.html',
                                gatos=gatos)
+    
+    @app.route('/catDictionary', methods=['GET', 'POST'])
+    def catDictionary():
+        if request.method == 'POST':
+            form_data = request.form.to_dict()
+            gatolist.append(form_data)
+            return (redirect(url_for('catDictionary')))
+        return render_template('catDictionary.html', gatolist=gatolist)
