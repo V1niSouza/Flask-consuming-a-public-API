@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container" style="background-color: #f0f0f0; border-radius: 8px">
+  <div class="row">
+    <div class="col-md-6 m-auto">
+      <a href="{{url_for('apigatos')}}" class="btn btn-dark">
+        << Todos os jogos</a
+      ><br /><br />
+      <div class="card">
+        <div class="card-body m-auto">
+          <p>Nome: {{ginfo.name}}</p>
+          <p>Origem: {{ginfo.origin}}</p>
+          <p>Temperamento: {{ginfo.temperament}}</p>
+          <p>Descrição: {{ginfo.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

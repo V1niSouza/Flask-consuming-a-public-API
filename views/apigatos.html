@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container" style="background-color: #f0f0f0; border-radius: 8px;">
+    <div class="row">
+        {% for gato in gatosjson %}
+        <div class="col-md-3 m-auto">
+            <div class="card" style="width: 16rem;">
+                <div class="card-body">
+                    <h5>{{gato.name}}</h5>
+                    <p>{{gato.name}}</p>
+                    <p>{{gato.origin}}</p>
+                    <a href="{{url_for('apigatos', id=gato.id)}}" class="btn btn-dark">+ Info</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
