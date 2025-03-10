@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <h2 class="text-center">Lista de Gatos</h2>
+    <div class="col">
+      <h4 class="pt-4">Adicione aqui um Gato a sua lista:</h4>
+      <div class="row-gap-3 mt-3">
+        <div class="col">
+          <form action="{{url_for('catlists')}}" method="POST">
+            <label>Nome do gato:</label>
+            <input class="form-control" type="text" name="gato" />
+            <div class="container text-end mt-3">
+              <button class="btn btn-outline-secondary" value="Entrar">
+                Adicionar
+              </button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+    <div class="col text-center">
+      <h4>Sua lista de Gatos:</h4>
+      <ol class="list-group list-group-numbered text-start">
+        {% for gato in gatos %}
+          <li class="list-group-item list-group-item-action mb-1">
+            <a>{{ gato }}</a>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+    
+
+  </div>
+</div>
+{% endblock content %}

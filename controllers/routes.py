@@ -4,15 +4,15 @@ import urllib
 # Converte dados para o formato json
 import json
 
+
+
 gatos = []
-gatolist = [{'nome': 'Farofa',
-             'raca': 'Vira lata',
-             'idade': 10}]
+gatolist = []
 
 
 def init_app(app):
+    
     @app.route('/')
-    # View function -> função de visualização
     def home():
         return render_template('index.html')
 
@@ -23,7 +23,7 @@ def init_app(app):
                 gatos.append(request.form.get('gato'))
                 return redirect(url_for('catlists'))
 
-        return render_template('catlist.html',
+        return render_template('catlists.html',
                                gatos=gatos)
     
     @app.route('/catDictionary', methods=['GET', 'POST'])
@@ -35,11 +35,10 @@ def init_app(app):
         return render_template('catDictionary.html', gatolist=gatolist)
     
 
-    @app.route('/apigatos', methods=['GET', 'POST'])
-    # Passando parâmetros para a rota
-    @app.route('/apigatos/<string:id>', methods=['GET', 'POST'])
-    # Definindo que o parâmetro é opcional
-    def apigatos(id=None):
+    @app.route('/apicats', methods=['GET', 'POST'])
+    
+    @app.route('/apicats/<string:id>', methods=['GET', 'POST'])   # Passando parâmetros para a rota
+    def apicats(id=None):     # Definindo que o parâmetro é opcional
         url = 'https://api.thecatapi.com/v1/breeds'
         res = urllib.request.urlopen(url)
         # print(res)
@@ -53,9 +52,9 @@ def init_app(app):
                     ginfo = g
                     break
             if ginfo:
-                return render_template('gatoinfo.html', ginfo=ginfo)
+                return render_template('catinfo.html', ginfo=ginfo)
             else:
                 return f'Gato com a ID {id} não foi encontrado.'
 
-        return render_template('apigatos.html',
+        return render_template('apicats.html',
                                gatosjson=gatosjson)

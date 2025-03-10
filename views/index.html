@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <h1>Bem-vindo a homepage!</h1>
-    <h2></h2>
-    
+<div class="container">
+    <div class="row">
+        <h2 class="text-center">Homepage da API de Gatos</h2>
+        <div class="col"></div>
+        <div class="col">
+            <div class="container">
+                <div class="row">
+                  <div class="d-grid gap-2 col-6 mx-auto"  style="width: 100vh;">
+                    <a href="{{url_for('catlists')}}" class="btn btn-outline-secondary btn-lg" ><i class="bi bi-list-ol"></i> Rota Lista</a>
+                    <a href="{{url_for('catDictionary')}}" class="btn btn-outline-secondary btn-lg" ><i class="bi bi-file-text-fill"></i>Rota Dicionario</a>
+                    <a href="{{url_for('apicats')}}" class="btn btn-outline-secondary btn-lg" ><i class="bi bi-people"></i>Rota API publica</a>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
 {% endblock content %}

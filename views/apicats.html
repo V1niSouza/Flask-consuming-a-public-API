@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container" style="background-color: #f0f0f0; border-radius: 8px;">
+    <div class="row">
+        {% for gato in gatosjson %}
+        <div class="col-md-6 mb-auto">
+            <div class="card mb-3 mx-auto mt-2" style="max-width: 500px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <div class="ratio ratio-4x3" style="margin-top: 5%;">
+                            <img src="https://cdn2.thecatapi.com/images/{{ gato.reference_image_id }}.jpg" class="img-fluid rounded aling-center">
+                        </div>
+                    </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5>Nome da Raça: {{gato.name}}</h5>
+                                <p>Origem: {{gato.origin}}</p>
+                                <div class="container text-end mt-3">
+                                    <a href="{{url_for('apicats', id=gato.id)}}" class="btn btn-outline-secondary">Saiba Mais</a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

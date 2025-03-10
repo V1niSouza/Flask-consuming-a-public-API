@@ -13,13 +13,34 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <title>Cats</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <title>API Gatos</title>
   </head>
   <body>
     <header>
-      <h1 style="text-align: center">Cats</h1>
-      <hr />
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{url_for('home')}}">
+            <img src="{{url_for('static', filename='images/avatar.jpeg')}}" style="width:40px; border-radius: 80%;"> 
+          </a>
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" style="color: rgb(218, 218, 218);" href="{{url_for('catlists')}}">Rota Lista</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: rgb(218, 218, 218);" href="{{url_for('catDictionary')}}">Rota Dicionario</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: rgb(218, 218, 218);" href="{{url_for('apicats')}}">Rota API</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </header>
+    <br>
+    <br>
 
     {% block content %}
     <!-- Aqui irá o conteúdo das demais páginas -->
@@ -27,7 +48,10 @@
 
     <footer>
       <hr />
-      <p style="text-align: center">Todos os direitos reservados &reg;</p>
+      <p style="text-align: center">Todos os direitos reservados &reg; 
+        <br>
+        Por Vinicius Souza
+      </p>
     </footer>
   </body>
 </html>
