@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h3 style="text-align: center">EDITAR GATO</h3>
+  <br />
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+      <form action="{{url_for('edit', id=g.id)}}" method="POST">
+        <label>Nome do gato:</label>
+        <input
+          type="text"
+          name="nome"
+          class="form-control"
+          value="{{g.nome}}"
+          required
+        />
+        <label>Raça do gato:</label>
+        <input
+          type="text"
+          name="raca"
+          class="form-control"
+          value="{{g.raca}}"
+          required
+        />
+        <label>Caracteristica do gato:</label>
+        <input
+          type="text"
+          name="caracter"
+          class="form-control"
+          value="{{g.caracter}}"
+          required
+        />
+        <div class="container text-center mt-3">
+          <a
+            href="{{url_for('edit', id=g.id)}}"
+            onclick="return confirm('Confirma as alterações?')"
+          >
+            <input type="submit" value="Alterar" class="btn btn-warning" />
+          </a>
+          <a href="{{url_for('gatoBanco')}}">
+            <input type="button" value="Cancelar" class="btn btn-danger" />
+          </a>
+        </div>
+      </form>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+{% endblock content %}

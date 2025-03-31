@@ -3,6 +3,8 @@ from flask import render_template, request, redirect, url_for
 import urllib
 # Converte dados para o formato json
 import json
+# Importando o Model
+from models.database import db, Gato
 
 
 
@@ -58,3 +60,35 @@ def init_app(app):
 
         return render_template('apicats.html',
                                gatosjson=gatosjson)
+
+    # CRUD - Listagem, Cadastro e Exclusão
+    @app.route('/gatoBanco', methods=['GET', 'POST'])
+    @app.route('/gatoBanco/delete/<int:id>')
+    def gatoBanco(id=None):
+        if id:
+            gato = Gato.query.get(id)
+            #Deleta o cadastro pela ID
+            db.session.delete(gato)
+            db.session.commit()
+            return redirect(url_for('gatoBanco'))
+    # Cadastra um novo gato
+        if request.method == 'POST':
+            newgato = Gato(request.form['nome'], request.form['raca'], request.form['caracter'])
+            db.session.add(newgato)
+            db.session.commit()
+            return redirect(url_for('gatoBanco'))
+        else:
+            page = request.args.get('page', 1, type=int)
+            per_page = 3
+            gatos_page = Gato.query.paginate(page=page,per_page=per_page)
+            return render_template('gatoBanco.html', gatosBanco=gatos_page)
+    @app.route('/edit/<int:id>', methods=['GET', 'POST'])
+    def edit(id):
+        g = Gato.query.get(id)
+        if request.method == 'POST':
+            g.nome = request.form['nome']
+            g.raca = request.form['raca']
+            g.caracter = request.form['caracter']
+            db.session.commit()
+            return redirect(url_for('gatoBanco'))
+        return render_template('editGato.html', g=g)

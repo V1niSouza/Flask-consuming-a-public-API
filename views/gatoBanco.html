@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+<h2 class="text-center">Controle de Gatos</h2>
+        <div class="row">
+            <div class="col"></div>
+                <div class="col-6">
+                    <form action="{{url_for('gatoBanco')}}" method="POST">
+                        <label>Nome do gato:</label>
+                        <input type="text" name="nome" placeholder="Digite o nome do Gato" class="form-control" required>
+                        <label>Raça do gato:</label>
+                        <input type="text" name="raca" placeholder="Digite a raça" class="form-control" required>
+                        <label>Caracteristica do gato:</label>
+                        <input type="text" name="caracter" placeholder="Digite a caracteristica do gato" class="form-control" required>
+                        <div class="container text-center mt-3">
+                            <input type="submit" name="Cadastrar" class="btn btn-success">
+                            <input type="reset" name="Limpar" class="btn btn-danger">
+                        </div>
+                    </form>
+                </div>
+            <div class="col"></div>
+        </div>
+    <hr>
+    <div class="row-gap-3 mt-3">
+        <div class="col">
+          <table class="table table-green table-hover">
+            <tr>
+                <th scope="col">Nome:</th>
+                <th scope="col">Raça:</th>
+                <th scope="col">Caracteristica:</th>
+                <th style="text-align: center;" colspan="2">Ação</th>
+            </tr>
+            <tbody>
+                {% for g in gatosBanco.items %}
+                <tr>
+                    <td>{{g.nome}}</td>
+                    <td>{{g.raca}}</td>
+                    <td>{{g.caracter}}</td>
+                    <td><a style="text-decoration: none; color: orange;" href="{{url_for('edit', id=g.id)}}">Editar</a></td>
+                    <td><a style="text-decoration: none; color: red;" href="{{url_for('gatoBanco', id=g.id)}}" onclick="return confirm('Deseja mesmo excluir o gato: {{g.nome}}?')">Excluir</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table> 
+            <p style="text-align: center;">
+                {% if gatosBanco.has_prev %}
+                <a href="{{url_for('gatoBanco', page=gatosBanco.prev_num)}}"><< Anterior</a>
+                {% endif %}
+                {% if gatosBanco.has_next %}
+                <a href="{{url_for('gatoBanco', page=gatosBanco.next_num)}}">Próximo >></a>
+            </p>
+                {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
